@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 277 61" role="img" aria-label="dotcom Growth">
+  <g font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="800" letter-spacing="-1.5">
+    <text x="14" y="43" fill="#fa5725">dotcom</text>
+    <text x="132" y="43" fill="#101014">Gr</text>
+    <text x="190" y="43" fill="#101014">wth</text>
+  </g>
+  <circle cx="179" cy="33" r="12" fill="#101014"/>
+  <path d="M174 36.5 179 29l5 7.5M179 29v10" fill="none" stroke="#fa5725" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
