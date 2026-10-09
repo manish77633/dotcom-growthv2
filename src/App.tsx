@@ -17,7 +17,6 @@ const photo = (id: number, width = 1600, height = 1000) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=${width}&h=${height}`;
 
 const images = {
-  hero: photo(7495291, 2100, 1150),
   about: photo(8279236, 1000, 1260),
   commerce: photo(7857532, 1300, 960),
   estate: photo(27459248, 1000, 760),
@@ -25,7 +24,6 @@ const images = {
   insightOne: photo(7693218, 1000, 720),
   insightTwo: photo(5717760, 1000, 720),
   insightThree: photo(7793730, 1000, 720),
-  cta: photo(5324992, 1300, 1150),
 };
 
 type PhotoKind = "people" | "chart" | "funnel" | "place";
@@ -115,13 +113,13 @@ function SocialIcon({ platform }: { platform: "linkedin" | "facebook" }) {
 function Pill({
   children,
   href,
-  tone = "blue",
+  tone = "orange",
   arrow = true,
   onClick,
 }: {
   children: React.ReactNode;
   href?: string;
-  tone?: "blue" | "dark" | "outline" | "light";
+  tone?: "orange" | "dark" | "outline" | "light";
   arrow?: boolean;
   onClick?: () => void;
 }) {
@@ -192,7 +190,7 @@ function Hero() {
           <span className="live-dot" />
           <span>Strategy / Technology / Performance</span>
         </div>
-        <h1 id="hero-title" data-reveal><span>DotCom Growth</span><span className="brand-fullstop">.</span><HeroSparkles /></h1>
+        <h1 id="hero-title" data-reveal><span>DotCom Growth</span><span className="brand-fullstop">.</span></h1>
         <p className="hero-statement" data-reveal>Growth that shows up <em>in your revenue.</em></p>
         <p className="hero-description" data-reveal>
           We design and build growth infrastructure that compounds. Enterprise-level capability, specialist teams,
@@ -203,13 +201,15 @@ function Hero() {
           <Pill href="#system" tone="outline" arrow={false}>Explore our approach <ArrowDown size={16} /></Pill>
         </div>
       </div>
-      <div className="hero-media" data-reveal>
-        <EditorialImage src={images.hero} alt="A team of business professionals in a collaborative strategy meeting" kind="people" eager className="hero-photograph" />
-        <div className="hero-photo-shade" aria-hidden="true" />
-        <svg className="hero-signal" viewBox="0 0 1200 470" preserveAspectRatio="none" fill="none" aria-hidden="true">
-          <path d="M-20 400 C190 390 275 338 420 350 S650 285 790 300 S1000 152 1230 112" stroke="rgba(255,255,255,.72)" strokeWidth="1.2" />
-          <circle cx="420" cy="350" r="5" fill="#fff" /><circle cx="790" cy="300" r="5" fill="#fff" /><circle cx="1050" cy="169" r="5" fill="#fff" />
+      <div className="hero-media hero-chart" data-reveal>
+        <div className="hero-chart-heading"><span>Connected growth, visualized</span><span>Illustrative</span></div>
+        <svg className="hero-chart-plot" viewBox="0 0 1200 470" preserveAspectRatio="none" role="img" aria-label="Illustrative line chart with an orange revenue curve rising above two comparison lines">
+          <path className="hero-series hero-series-muted" d="M0 375 C130 350 230 380 340 330 S565 310 690 320 S910 250 1200 245" />
+          <path className="hero-series hero-series-ink" d="M0 405 C130 390 245 345 350 355 S565 275 685 290 S935 220 1200 195" />
+          <path className="hero-series hero-series-revenue" d="M0 420 C140 405 240 390 350 365 S570 305 690 270 S915 140 1160 65" />
+          <circle className="hero-chart-dot" cx="1160" cy="65" r="8" />
         </svg>
+        <div className="hero-chart-legend"><span><i className="legend-revenue" />Revenue signal</span><span><i className="legend-ink" />Demand</span><span><i className="legend-muted" />Reach</span></div>
       </div>
       <div className="hero-caption container">
         <span>01 / The point of view</span>
@@ -218,14 +218,6 @@ function Hero() {
       </div>
     </section>
   );
-}
-
-function HeroSparkles() {
-  return <span className="hero-sparkles" aria-hidden="true">{Array.from({ length: 32 }, (_, i) => {
-    const x = 5 + ((i * 37 + 13) % 90);
-    const y = 16 + ((i * 29 + 7) % 64);
-    return <i key={i} className={i % 9 === 0 ? "spark-star" : ""} style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${-(i % 7) * .8}s`, opacity: .25 + (i % 4) * .1 }} />;
-  })}</span>;
 }
 
 const logoGroups = [
@@ -334,7 +326,7 @@ function CapabilityArt({ active }: { active: number }) {
   if (active === 0) {
     return (
       <div className="capability-art art-martech" aria-hidden="true">
-        <div className="art-halo art-halo-blue" /><div className="art-halo art-halo-mint" />
+        <div className="art-halo art-halo-orange" /><div className="art-halo art-halo-soft" />
         <svg className="art-connectors" viewBox="0 0 590 390" fill="none" preserveAspectRatio="none">
           <path d="M55 105 C140 105 142 185 218 185 S320 185 365 185 S467 120 552 120" />
           <path d="M55 278 C140 278 142 185 218 185 S320 185 365 185 S467 277 552 277" />
@@ -351,12 +343,12 @@ function CapabilityArt({ active }: { active: number }) {
   if (active === 1) {
     return (
       <div className="capability-art art-performance" aria-hidden="true">
-        <div className="art-halo art-halo-coral" />
+        <div className="art-halo art-halo-wash" />
         <div className="chart-topline">DEMAND / PIPELINE / REVENUE</div>
         <svg viewBox="0 0 590 390" fill="none" preserveAspectRatio="xMidYMid meet">
           <path className="chart-grid" d="M42 80H555M42 157H555M42 234H555M42 311H555" />
           <path className="chart-line" d="M42 292 C107 295 116 266 167 259 S246 279 296 210 S385 240 432 151 S510 163 555 75" />
-          <circle cx="296" cy="210" r="6" fill="#242424" /><circle cx="432" cy="151" r="6" fill="#242424" /><circle cx="555" cy="75" r="6" fill="#242424" />
+          <circle cx="296" cy="210" r="6" fill="var(--ink)" /><circle cx="432" cy="151" r="6" fill="var(--ink)" /><circle cx="555" cy="75" r="6" fill="var(--ink)" />
           <path className="chart-axis" d="M42 330H555" />
         </svg>
         <div className="chart-footer"><span>FIRST TOUCH</span><span>QUALIFIED DEMAND</span><span>CLOSED REVENUE</span></div>
@@ -365,7 +357,7 @@ function CapabilityArt({ active }: { active: number }) {
   }
   return (
     <div className="capability-art art-creative" aria-hidden="true">
-      <div className="art-halo art-halo-gold" />
+      <div className="art-halo art-halo-highlight" />
       <div className="creative-label">BRAND / POSITIONING / PRODUCTION</div>
       <div className="creative-type">Make it<br /><em>mean</em><br />something.</div>
       <div className="creative-rule"><span /><span /><span /></div>
@@ -817,7 +809,6 @@ function FinalCTA() {
           </form>
           <div className="contact-links"><a href="mailto:dotcomgrowth2020@gmail.com"><Mail size={16} /> dotcomgrowth2020@gmail.com</a><a href="tel:+919588207166"><Phone size={16} /> +91 95882 07166</a></div>
         </div>
-        <EditorialImage src={images.cta} alt="Business team collaborating around a laptop in an office" kind="people" className="contact-photo" />
       </div>
     </section>
   );
