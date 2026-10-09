@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import brandLogo from "./brand-logo.svg?inline";
 import brandLogoLight from "./brand-logo-light.svg?inline";
 import {
@@ -725,9 +726,10 @@ function Insights() {
     const previousFocus = document.activeElement as HTMLElement | null;
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setOpenArticle(null); };
     document.addEventListener("keydown", onKey);
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; previousFocus?.focus(); };
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
   }, [openArticle]);
   return (
     <section className="insights-section section-pad" id="insights">
@@ -747,7 +749,7 @@ function Insights() {
           ))}
         </div>
       </div>
-      {openArticle && (
+      {openArticle && createPortal((
         <div className="article-modal-backdrop" role="presentation" onMouseDown={() => setOpenArticle(null)}>
           <div className="article-modal" role="dialog" aria-modal="true" aria-label={openArticle.title} onMouseDown={(event) => event.stopPropagation()}>
             <button ref={closeRef} className="modal-close" type="button" aria-label="Close article preview" onClick={() => setOpenArticle(null)}><X size={22} /></button>
@@ -758,7 +760,7 @@ function Insights() {
             <Pill href="#contact" onClick={() => setOpenArticle(null)}>Talk about this</Pill>
           </div>
         </div>
-      )}
+      ), document.body)}
     </section>
   );
 }
